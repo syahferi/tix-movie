@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "891930385759",
+    "firebase_url": "https://movtix-7ff1f-default-rtdb.firebaseio.com",
+    "project_id": "movtix-7ff1f",
+    "storage_bucket": "movtix-7ff1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891930385759:android:68bbc7739a53b090abeaea",
+        "android_client_info": {
+          "package_name": "com.syahferiaswan.tix_movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891930385759-mh42nnt7ni8eq5bpc4ufgc75jiubhmfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.syahferiaswan.tix_movie",
+            "certificate_hash": "867d36202535b1fe330904b904047845635019a2"
+          }
+        },
+        {
+          "client_id": "891930385759-u40lurb0n050vg38epq0adsd3st3k757.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0noKidOlG9dZb05FVchj8c47cmHz5dU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891930385759-u40lurb0n050vg38epq0adsd3st3k757.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
