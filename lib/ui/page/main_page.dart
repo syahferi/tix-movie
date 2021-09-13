@@ -6,6 +6,16 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  late int bottomNavBarIndex;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    bottomNavBarIndex = 0;
+    pageController = PageController(initialPage: bottomNavBarIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +23,18 @@ class _MainPageState extends State<MainPage> {
         children: [
           Container(color: accentColor1),
           SafeArea(child: Container(color: Color(0xFFF6F7F9))),
-          ListView(),
+          PageView(
+            controller: pageController,
+            onPageChanged: (index) {
+              setState(() {
+                bottomNavBarIndex = index;
+              });
+            },
+            children: [
+              Center(child: Text("New Movie")),
+              Center(child: Text("My Tickets"))
+            ],
+          ),
           createCustomNavBar(),
           Align(
             alignment: Alignment.bottomCenter,
@@ -53,6 +74,39 @@ class _MainPageState extends State<MainPage> {
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
+          ),
+          child: BottomNavigationBar(
+            onTap: (index) {
+              setState(() {
+                bottomNavBarIndex = index;
+                pageController.jumpToPage(index);
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                  label: 'New Movies',
+                  icon: Container(
+                    height: 20,
+                    margin: EdgeInsets.only(bottom: 6),
+                    child: Image.asset((bottomNavBarIndex == 0)
+                        ? "assets/007-popcorn.png"
+                        : "assets/001-film_clapperboard.png"),
+                  )),
+              BottomNavigationBarItem(
+                  label: 'My Tickets',
+                  icon: Container(
+                    height: 20,
+                    margin: EdgeInsets.only(bottom: 6),
+                    child: Image.asset((bottomNavBarIndex == 1)
+                        ? "assets/004-tickets.png"
+                        : "assets/001-film_clapperboard.png"),
+                  )),
+            ],
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            selectedItemColor: mainColor,
+            unselectedItemColor: Color(0xFFE5E5E5),
+            currentIndex: bottomNavBarIndex,
           ),
         ),
       ));
