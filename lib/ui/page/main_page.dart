@@ -30,10 +30,7 @@ class _MainPageState extends State<MainPage> {
                 bottomNavBarIndex = index;
               });
             },
-            children: [
-              Center(child: Text("New Movie")),
-              Center(child: Text("My Tickets"))
-            ],
+            children: [MoviePage(), Center(child: Text("My Tickets"))],
           ),
           createCustomNavBar(),
           Align(
@@ -53,7 +50,10 @@ class _MainPageState extends State<MainPage> {
                     color: Colors.black.withOpacity(0.54),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<UserBloc>(context).add(UserSignOut());
+                  AuthService.signOut();
+                },
               ),
             ),
           ),

@@ -12,11 +12,11 @@ class UserTix extends Equatable {
   UserTix({
     required this.id,
     this.email,
-    this.name = "no name",
+    this.name = "",
     this.selectedGenre = const [],
     this.selectedLanguage = "english",
     this.profilePicture = "",
-    this.accountBalance = 10000,
+    this.accountBalance = 0,
   });
 
   @override
