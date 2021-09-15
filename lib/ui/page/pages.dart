@@ -9,11 +9,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tix_movie/bloc/blocs.dart';
+import 'package:tix_movie/model/models.dart';
 import 'package:tix_movie/services/services.dart';
 import 'package:tix_movie/shared/shared.dart';
 
+part 'account_confirmation_page.dart';
 part 'main_page.dart';
 part 'movie_page.dart';
+part 'preference_page.dart';
 part 'sigin_page.dart';
+part 'sign_up_page.dart';
 part 'splash_page.dart';
 part 'wrapper.dart';
