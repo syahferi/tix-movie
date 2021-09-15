@@ -8,6 +8,11 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
+        decoration: BoxDecoration(
+            gradient: RadialGradient(radius: 2.0, colors: [
+          mainColor,
+          accentColor1,
+        ])),
         padding: EdgeInsets.symmetric(horizontal: defaultMargin),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -17,7 +22,7 @@ class SplashPage extends StatelessWidget {
               height: 136,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/default_cinema.png"),
+                  image: AssetImage("assets/movie_icon.png"),
                 ),
               ),
             ),
@@ -25,15 +30,16 @@ class SplashPage extends StatelessWidget {
               margin: EdgeInsets.only(top: 70, bottom: 16),
               child: Text(
                 'New Experience',
-                style: blackTextFont.copyWith(fontSize: 20),
+                style:
+                    blackTextFont.copyWith(fontSize: 20, color: Colors.white),
               ),
             ),
             Text(
               'Watch a new movie\n easier than any before',
               style: greyTextFont.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-              ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
             Container(
@@ -43,10 +49,13 @@ class SplashPage extends StatelessWidget {
               child: ElevatedButton(
                 child: Text(
                   'Get Started',
-                  style: whiteTextFont.copyWith(fontSize: 16),
+                  style: whiteTextFont.copyWith(
+                      fontSize: 16,
+                      color: mainColor,
+                      fontWeight: FontWeight.bold),
                 ),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(mainColor)),
+                    backgroundColor: MaterialStateProperty.all(accentColor2)),
                 onPressed: () => BlocProvider.of<PageBloc>(context)
                     .add(GoToRegistrationPage(RegistrationData())),
               ),
@@ -65,7 +74,8 @@ class SplashPage extends StatelessWidget {
                       BlocProvider.of<PageBloc>(context).add(GoToLoginPage()),
                   child: Text(
                     'Sign In',
-                    style: purpleTextFont.copyWith(fontWeight: FontWeight.bold),
+                    style: purpleTextFont.copyWith(
+                        color: accentColor2, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

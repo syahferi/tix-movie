@@ -43,7 +43,7 @@ class MoviePage extends StatelessWidget {
                               image: DecorationImage(
                                 image: (profilePicture != null &&
                                         profilePicture.isEmpty)
-                                    ? AssetImage("assets/005-glass.png")
+                                    ? AssetImage('assets/profile_icon.png')
                                     : NetworkImage(profilePicture ?? '')
                                         as ImageProvider,
                               ),
