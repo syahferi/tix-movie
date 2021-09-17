@@ -15,19 +15,19 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  late var profilePicture;
+  late XFile? profilePicture;
 
   @override
   void initState() {
     super.initState();
     nameController.text = widget.registrationData.name;
     emailController.text = widget.registrationData.email;
-
-    profilePicture = widget.registrationData.profileImage;
   }
 
   @override
   Widget build(BuildContext context) {
+    profilePicture = widget.registrationData.profileImage;
+
     BlocProvider.of<ThemeAppBloc>(context)
         .add(ThemeAppChanged(ThemeData().copyWith(primaryColor: Colors.grey)));
 
@@ -79,20 +79,30 @@ class _SignUpPageState extends State<SignUpPage> {
                           Container(
                             width: 90,
                             height: 90,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: (profilePicture == null)
-                                    ? AssetImage('assets/profile_icon.png')
-                                    : FileImage(profilePicture)
-                                        as ImageProvider,
-                              ),
+                            child: ClipOval(
+                              child: (profilePicture == null)
+                                  ? Image.asset('assets/profile_icon.png')
+                                  : Image.file(
+                                      File(
+                                        profilePicture?.path ?? '',
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           ),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () async {
+                                if (widget.registrationData.profileImage ==
+                                    null) {
+                                  widget.registrationData.profileImage =
+                                      await getImage();
+                                } else {
+                                  widget.registrationData.profileImage = null;
+                                }
+                                setState(() {});
+                              },
                               child: Container(
                                 height: 28,
                                 width: 28,
@@ -153,7 +163,51 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 30),
                     FloatingActionButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (nameController.text.trim().isEmpty &&
+                            emailController.text.trim().isEmpty &&
+                            passwordController.text.trim().isEmpty &&
+                            confirmPasswordController.text.trim().isEmpty) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: 'Please fill all the fields',
+                          )..show(context);
+                        } else if (passwordController.text.trim() !=
+                            confirmPasswordController.text.trim()) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: 'Mismatch password and confirmed password',
+                          )..show(context);
+                        } else if (passwordController.text.trim().length < 6) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: 'Password length min 6 character',
+                          )..show(context);
+                        } else if (!EmailValidator.validate(
+                            emailController.text.trim())) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.BOTTOM,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: 'Wrong formatted email address',
+                          )..show(context);
+                        } else {
+                          widget.registrationData.name =
+                              nameController.text.trim();
+                          widget.registrationData.email =
+                              emailController.text.trim();
+                          widget.registrationData.password =
+                              passwordController.text.trim();
+
+                          //todo goto prefference page
+                        }
+                      },
                       backgroundColor: mainColor,
                       child: Icon(Icons.arrow_forward),
                       elevation: 0,

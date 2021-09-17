@@ -1,12 +1,12 @@
 part of 'models.dart';
 
 class RegistrationData {
-  final String name;
-  final String email;
-  final String password;
-  final List<String> selectedGenres;
-  final String selectedLang;
-  final File? profileImage;
+  String name;
+  String email;
+  String password;
+  List<String> selectedGenres;
+  String selectedLang;
+  XFile? profileImage;
 
   RegistrationData({
     this.name = '',
