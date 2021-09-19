@@ -23,9 +23,3 @@ part 'sigin_page.dart';
 part 'sign_up_page.dart';
 part 'splash_page.dart';
 part 'wrapper.dart';
-
-Future<XFile?> getImage() async {
-  final imagePicker = ImagePicker();
-  final image = await imagePicker.pickImage(source: ImageSource.gallery);
-  return image;
-}
