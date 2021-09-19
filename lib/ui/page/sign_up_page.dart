@@ -205,7 +205,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           widget.registrationData.password =
                               passwordController.text.trim();
 
-                          //todo goto prefference page
+                          BlocProvider.of<PageBloc>(context)
+                              .add(GotoPreferencePage(widget.registrationData));
                         }
                       },
                       backgroundColor: mainColor,

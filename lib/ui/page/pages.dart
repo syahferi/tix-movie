@@ -13,6 +13,7 @@ import 'package:tix_movie/bloc/blocs.dart';
 import 'package:tix_movie/model/models.dart';
 import 'package:tix_movie/services/services.dart';
 import 'package:tix_movie/shared/shared.dart';
+import 'package:tix_movie/ui/widget/widgets.dart';
 
 part 'account_confirmation_page.dart';
 part 'main_page.dart';
