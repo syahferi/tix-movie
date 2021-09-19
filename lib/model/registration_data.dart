@@ -13,7 +13,7 @@ class RegistrationData {
     this.email = '',
     this.password = '',
     this.selectedGenres = const [],
-    this.selectedLang = '',
+    this.selectedLang = 'Indonesia',
     this.profileImage,
   });
 }
