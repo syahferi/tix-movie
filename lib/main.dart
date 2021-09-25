@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (_) => PageBloc()),
           BlocProvider(create: (_) => UserBloc()),
           BlocProvider(create: (_) => ThemeAppBloc()),
+          BlocProvider(create: (_) => MovieBloc()..add(FetchMovie())),
         ],
         child: BlocBuilder<ThemeAppBloc, ThemeAppState>(
           builder: (_, state) {
