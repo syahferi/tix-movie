@@ -18,6 +18,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is UserLoaded) {
       UserTix user = await UserService.getUser(event.id);
       yield UserLoadSuccess(user);
+    } else if (event is UpdatedData) {
+      UserTix updatedUser = (state as UserLoadSuccess).user.copyWith(
+            name: event.name,
+            profilePicture: event.profileImage,
+          );
+      await UserService.updateData(updatedUser);
+      yield UserLoadSuccess(updatedUser);
     } else {
       yield UserSignOutSuccess();
     }

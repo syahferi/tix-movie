@@ -8,6 +8,7 @@ class MoviePage extends StatelessWidget {
     return ListView(
       children: [
         Container(
+          height: 100,
           decoration: BoxDecoration(
             color: accentColor1,
             borderRadius: BorderRadius.only(
@@ -19,6 +20,13 @@ class MoviePage extends StatelessWidget {
           child: BlocBuilder<UserBloc, UserState>(
             builder: (_, state) {
               if (state is UserLoadSuccess) {
+                if (imageToUpload != null) {
+                  uploadImage(imageToUpload!).then((downloadUrl) {
+                    imageToUpload = null;
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UpdatedData(profileImage: downloadUrl));
+                  });
+                }
                 var profilePicture = state.user.profilePicture;
                 return Row(
                   children: [
@@ -41,12 +49,12 @@ class MoviePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: (profilePicture != null &&
-                                        profilePicture.isEmpty)
-                                    ? AssetImage('assets/profile_icon.png')
-                                    : NetworkImage(profilePicture ?? '')
-                                        as ImageProvider,
-                              ),
+                                  image: (profilePicture != null &&
+                                          profilePicture.isEmpty)
+                                      ? AssetImage('assets/profile_icon.png')
+                                      : NetworkImage(profilePicture ?? '')
+                                          as ImageProvider,
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         ],

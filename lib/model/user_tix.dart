@@ -19,6 +19,17 @@ class UserTix extends Equatable {
     this.accountBalance = 0,
   });
 
+  UserTix copyWith({String? name, String? profilePicture, int? balance}) =>
+      UserTix(
+        id: this.id,
+        email: this.email,
+        name: name ?? this.name,
+        selectedGenre: this.selectedGenre,
+        selectedLanguage: this.selectedLanguage,
+        profilePicture: profilePicture ?? this.profilePicture,
+        accountBalance: balance ?? this.accountBalance,
+      );
+
   @override
   List<Object?> get props => [id];
 }
